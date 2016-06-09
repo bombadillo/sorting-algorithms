@@ -54,7 +54,7 @@
 
         public void QuickSort(List<int> quickList)
         {
-
+            Console.WriteLine("");
             Console.WriteLine("========= Quick Sort =========");
 
             QuickSorter.Iterations = 0;
@@ -75,6 +75,8 @@
                 Console.Write("{0}, ", item);
             }
 
+            Console.WriteLine("");
+            Console.WriteLine("");
             Console.WriteLine("{0} iterations", QuickSorter.Iterations);
         }
     }

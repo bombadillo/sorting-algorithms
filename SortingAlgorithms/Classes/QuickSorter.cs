@@ -9,54 +9,51 @@
 
         public int Iterations { get; set; }
 
-        public List<int> Sort(List<int> items, int left = 0, int right = 0) {
+        public List<int> Sort(List<int> items, int leftIndex = 0, int rightIndex = 0) {
 
-            if (right == 0) 
-                right = items.Count - 1;
+            if (rightIndex == 0) 
+                rightIndex = items.Count - 1;
         
-            var index = Partition(items, left, right);
+            var index = Partition(items, leftIndex, rightIndex);
         
-            if (left < index - 1) {
-              Sort(items, left, index - 1);
+            if (leftIndex < index - 1) {
+              Sort(items, leftIndex, index - 1);
             }
         
-            if (index < right) {
-              Sort(items, index, right);
+            if (index < rightIndex) {
+              Sort(items, index, rightIndex);
             }            
 
             return items;
         }
         
-        private int Partition(List<int> items, int left, int right) {
+        private int Partition(List<int> items, int leftPointer, int rightPointer) {
             
-            var pivot   = items[(right + left) / 2];
-            var i       = left;
-            var j       = right;
+            var pivot   = items[(rightPointer + leftPointer) / 2];
+                
+            while (leftPointer <= rightPointer) {
         
-        
-            while (i <= j) {
-        
-                while (items[i] < pivot) {
-                    i++;
+                while (items[leftPointer] < pivot) {
+                    leftPointer++;
                     Iterations++;
                 }
         
-                while (items[j] > pivot) {
-                    j--;
+                while (items[rightPointer] > pivot) {
+                    rightPointer--;
                     Iterations++;
                 }
         
-                if (i <= j) {
-                    Swap(items, i, j);
-                    i++;
-                    j--;
+                if (leftPointer <= rightPointer) {
+                    Swap(items, leftPointer, rightPointer);
+                    leftPointer++;
+                    rightPointer--;
                     Iterations++;
                 }
 
                 Iterations++;
             }
         
-            return i;
+            return leftPointer;
         }
         
         private void Swap(List<int> originalList, int leftPointer, int rightPointer) {
